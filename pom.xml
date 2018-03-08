@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.0.RELEASE</version>
+        <version>1.5.2.RELEASE</version>
     </parent>
 
     <properties>
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
-            <version>0.23.0.RELEASE</version>
+            <version>LATEST</version>
         </dependency>
 
         <!--Test-->
@@ -51,17 +51,20 @@
             <scope>test</scope>
         </dependency>
 
-        <!--PostgreSQL-->
+        <!--&lt;!&ndash;for PostgreSQL database&ndash;&gt;-->
         <!--<dependency>-->
-        <!--<groupId>org.postgresql</groupId>-->
-        <!--<artifactId>postgresql</artifactId>-->
+            <!--<groupId>org.postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>42.0.0</version>-->
         <!--</dependency>-->
 
+        <!--for H2 database-->
         <!--H2-->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
         </dependency>
+
 
         <!--Swagger-->
         <dependency>
@@ -88,5 +91,46 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <!--for Docker-->
+    <!--<build>-->
+        <!--<finalName>app</finalName>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<groupId>io.fabric8</groupId>-->
+                <!--<artifactId>docker-maven-plugin</artifactId>-->
+                <!--<version>0.20.1</version>-->
+                <!--<configuration>-->
+                    <!--<images>-->
+                        <!--<image>-->
+                            <!--<name>app</name>-->
+                            <!--<build>-->
+                                <!--<dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>-->
+                                <!--<assembly>-->
+                                    <!--<mode>dir</mode>-->
+                                    <!--<targetDir>/app</targetDir>-->
+                                    <!--<descriptor>${project.basedir}/src/main/docker/assembly.xml</descriptor>-->
+                                <!--</assembly>-->
+                            <!--</build>-->
+                        <!--</image>-->
+                    <!--</images>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>build</id>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>build</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
 
 </project>
