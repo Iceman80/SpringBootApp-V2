@@ -21,6 +21,8 @@ public interface UserService {
 
     List<User> findByStatus(Status status);
 
+//    String addDepartment(int id, String department);
+
     String addDepartment(int id, String department);
 
     void addUser(User user);

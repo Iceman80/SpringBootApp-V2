@@ -19,7 +19,7 @@ public class Task extends ResourceSupport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String taskId;
+    private int taskId;
 
     private String description;
 
@@ -37,7 +37,7 @@ public class Task extends ResourceSupport {
     public Task() {
     }
 
-    public String getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 

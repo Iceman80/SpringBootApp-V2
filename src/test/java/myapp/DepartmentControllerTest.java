@@ -3,10 +3,17 @@ package myapp;
 import io.restassured.http.ContentType;
 import myapp.model.Department;
 
+import myapp.repository.DepartmentRepository;
+import myapp.service.Helper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
@@ -19,12 +26,23 @@ public class DepartmentControllerTest {
 
     private static final String ENDPOINT = "http://localhost:8080/department/";
 
+    @Autowired
+    private DepartmentRepository repository;
+
+    @Before
+    public void initDb() {
+        if (!repository.findAll().iterator().hasNext()) {
+            List<Department> departments = Helper.getDepartment();
+            repository.saveAll(departments);
+        }
+    }
+
     @Test
     public void givenRequestForDepartments_expectThreeItems() {
         given().get(ENDPOINT + "all").then().assertThat().body("content.size()", is(3));
     }
 
-    @Test(expected = java.lang.AssertionError.class)
+    @Test(expected = AssertionError.class)
     public void givenRequestForDepartments_expectError() {
         given().get(ENDPOINT + "all").then().assertThat().body("content.size()", is(1));
     }

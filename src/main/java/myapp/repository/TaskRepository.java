@@ -5,5 +5,5 @@ import myapp.model.Task;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface TaskRepository  extends CrudRepository<Task, String>{
+public interface TaskRepository  extends CrudRepository<Task, Integer>{
 }

@@ -37,12 +37,11 @@ public class TaskController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Task> findAll() {
-        List<Task> tasks = service.findAllTasks();
-        return tasks;
+        return service.findAllTasks();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Task findOne(@PathVariable("id") String id) {
+    public Task findOne(@PathVariable("id") int id) {
         Task task= service.findTaskById(id);
         Link selfLink = linkTo(TaskController.class).slash(task.getTaskId()).withSelfRel();
         task.add(selfLink);
@@ -50,13 +49,13 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteByID(@PathVariable("id") String id) {
+    public String deleteByID(@PathVariable("id") int id) {
         service.deleteTaskById(id);
         return "Delete task by Id OK";
     }
 
     @RequestMapping(value = "/{taskId}/user/{userId}", method = RequestMethod.POST)
-    public String updateTask(@PathVariable("taskId") String taskId, @PathVariable("userId") int userId) {
+    public String updateTask(@PathVariable("taskId") int taskId, @PathVariable("userId") int userId) {
         Task task = service.findTaskById(taskId);
         User user = userService.findOne(userId);
         task.getUsers().add(user);

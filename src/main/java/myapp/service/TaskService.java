@@ -10,7 +10,7 @@ public interface TaskService {
 
     void saveTask(Task task);
 
-    Task findTaskById (String taskId);
+    Task findTaskById (int taskId);
 
-    void deleteTaskById (String taskId);
+    void deleteTaskById (int taskId);
 }
