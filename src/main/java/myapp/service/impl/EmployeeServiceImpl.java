@@ -23,12 +23,14 @@ import static java.util.Optional.ofNullable;
 @Service("employeeService")
 public class EmployeeServiceImpl implements UserService {
     private final static Logger log = LogManager.getLogger(EmployeeServiceImpl.class);
+    private final UserRepository repository;
+    private final DepartmentRepository departmentRepository;
 
     @Autowired
-    private UserRepository repository;
-
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    public EmployeeServiceImpl(UserRepository repository, DepartmentRepository departmentRepository) {
+        this.repository = repository;
+        this.departmentRepository = departmentRepository;
+    }
 
     public List<User> findAll() {
         List<User> users = (List<User>) repository.findAll();
